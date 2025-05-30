@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Random Background Color</title>
+    <style>
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: content-box;
+}
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #E3E3E3;
+}
+#hexColor {
+  margin: 0 0 20px 0;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#btn {
+  align-self: center;
+  justify-self: center; 
+  padding: 10px 20px 10px 20px;
+  border-radius: 10px 20px 30px/30px 20px 10px;
+  box-shadow: 1px 2px 13px 1px #ff123445,
+    2px 3px 14px 2px #ff143850;
+  cursor: pointer;
+}
+
+.message.hide {
+  display: none;
+}
+.message.show {
+  display: block;
+}
+    </style>
+</head>
+<body>
+    <span id="message" class="message"></span>
+<div id="hexColor" title="Click to Copy Code">#E3E3E3</div>
+<button id="btn">Click me to Change Color</button>
+    <script>
+
+const colors = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"];
+let btn = document.getElementById("btn");
+let body = document.querySelector("body");
+let hexColor = document.getElementById("hexColor");
+
+btn.addEventListener("click", (event) => {
+  event.preventDefault();
+  let hexCode = "#";
+  for(let i=1; i<=6; i++) {
+    hexCode += colors[Math.floor(Math.random() * colors.length)];
+  }
+  hexColor.textContent = hexCode;
+  body.style.background = hexCode;
+  console.log(hexCode);
+});
+
+hexColor.addEventListener("click", (event) => {
+    let text = event.target.textContent;
+    let msg = document.getElementById("message");
+    msg.textContent = "Copied";
+    msg.classList.add("show");
+    setTimeout(()=> {
+      msg.classList.remove("show");
+      msg.classList.add("hide");
+    },2000);
+    console.log(text);
+});
+
+function hideMessage() {
+    
+}
+    </script>
+</body>
+</html>
